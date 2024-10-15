@@ -43,8 +43,6 @@ def draw_guides(image: Image.Image) -> Image.Image:
         draw.line([(mid_x - 5, y), (mid_x + 5, y)], fill="blue", width=1)
         draw.text((mid_x + 10, y), str(i), fill="blue", font=font)
 
-    return image
-
 
 def draw_rectangles_with_labels(
     image: Image,
@@ -139,7 +137,7 @@ if __name__ == "__main__":
         image,
         [
             [100, 100, 300, 300],
-            [400, 400, 600, 600],
+            [400, 400, 550, 600],
         ],
         ["rectangle 1", "rectangle 2"],
     )
