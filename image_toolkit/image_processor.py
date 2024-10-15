@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+from typing import Union, List, Tuple
 
 
 def draw_guides(image: Image.Image) -> Image.Image:
@@ -45,7 +46,19 @@ def draw_guides(image: Image.Image) -> Image.Image:
     return image
 
 
-def draw_rectangles_with_labels(image, coordinates_list, labels):
+def draw_rectangles_with_labels(
+    image: Image,
+    coordinates_list: Union[
+        List[
+            Union[
+                List[float],
+                Tuple[float,],
+            ]
+        ],
+        Tuple[List, Tuple],
+    ],
+    labels: Union[List[str], Tuple[str]],
+):
     """
     在图像上绘制多个矩形并在合适的位置写上标签。
 
@@ -118,4 +131,16 @@ def draw_rectangles_with_labels(image, coordinates_list, labels):
                 draw.text(pos, label, fill="black", font=font)
                 break
 
-    return image
+
+if __name__ == "__main__":
+    image = Image.open("/workspace/swarm/image_toolkit/images/OIP-C.jpg")
+    draw_guides(image)
+    draw_rectangles_with_labels(
+        image,
+        [
+            [100, 100, 300, 300],
+            [400, 400, 600, 600],
+        ],
+        ["rectangle 1", "rectangle 2"],
+    )
+    image.save("output.jpg")
